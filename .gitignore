@@ -15,4 +15,5 @@ test_gen.caches
 TEST-*.xml
 junit*.properties
 
-*.meta
+# Unity3D generated meta files
+*.pidb.meta
