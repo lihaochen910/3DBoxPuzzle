@@ -42,8 +42,14 @@ public class Box : MonoBehaviour {
 
     public enum BoxState
     {
-        Linked,//连接状态
-        Isolated,//孤立状态
+        /// <summary>
+        /// 连接状态
+        /// </summary>
+        Linked,
+        /// <summary>
+        /// 孤立状态
+        /// </summary>
+        Isolated,
     }
 
     #region MonoBehaviour
@@ -57,7 +63,10 @@ public class Box : MonoBehaviour {
     #endregion
 
     #region AlphaCode
-    //被推动动画结束后执行回调
+    /// <summary>
+    /// 被推动动画结束后执行回调，逻辑入口
+    /// </summary>
+    /// <param name="moveEndPosition"></param>
     public void OnMoveEnd(Vector3 moveEndPosition)
     {
         ExecuteTimer.OnExecutePrepare();
@@ -100,7 +109,7 @@ public class Box : MonoBehaviour {
         {
             var box = Affected_Boxes.Dequeue();
 
-            box.Recive();
+            box.ReciveAffect();
 
             foreach (var sub in GetAffectedBoxes(_map.GetBoxIndex(box)))
             {
@@ -217,7 +226,7 @@ public class Box : MonoBehaviour {
                     orderby pos.y descending
                     select pos).ToArray()[0];
         }
-        Debug.LogWarning("dropPosition not found");
+        Debug.LogError("dropPosition not found");
         //如果没有找到停靠点，则返回地图外最下方的坐标
         return _nilPosition;
     }
@@ -258,7 +267,7 @@ public class Box : MonoBehaviour {
         _map.MoveTo(this, position);
     }
     /* 受影响时被调用 */
-    protected void Recive()
+    protected void ReciveAffect()
     {
         ReciveCount++;
 
